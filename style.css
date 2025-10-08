@@ -299,6 +299,10 @@ section {
     transition: var(--transition);
 }
 
+.form-group input::placeholder {
+    color: var(--light-color) !important;
+}
+
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
