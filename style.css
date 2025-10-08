@@ -297,6 +297,7 @@ section {
     font-family: 'Work Sans', sans-serif;
     font-size: 1rem;
     transition: var(--transition);
+    background-color: var(--primary-color) !important;
 }
 
 .form-group input::placeholder {
