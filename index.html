@@ -23,7 +23,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#countdown">UPCOMING</a></li>
+                <!-- <li><a href="#countdown">UPCOMING</a></li> -->
                 <li><a href="#bio">BIO</a></li>
                 <li><a href="#music">MUSIC</a></li>
                 <li><a href="#contact">CONTACT</a></li>
@@ -32,42 +32,8 @@
     </header>
 
     <main>
-        <!-- Countdown Section -->
-        <section id="countdown" class="countdown-section">
-            <div class="countdown-container">
-                <div class="pre-release-badge">Pre-Release</div>
-                
-                <div class="album-cover-wrapper">
-                    <img src="https://i.scdn.co/image/ab67616d0000b273c6b5adc2414dd6acae5a88ec" 
-                         alt="Whippersnapper Album Cover" 
-                         class="album-cover">
-                </div>
 
-                <div class="release-type">Single</div>
-                <h2 class="release-title">Whippersnapper</h2>
-
-                <div class="countdown">
-                    <div class="countdown-unit">
-                        <span class="countdown-number" id="days">00</span>
-                        <span class="countdown-label">Days</span>
-                    </div>
-                    <div class="countdown-unit">
-                        <span class="countdown-number" id="hours">00</span>
-                        <span class="countdown-label">Hours</span>
-                    </div>
-                    <div class="countdown-unit">
-                        <span class="countdown-number" id="minutes">00</span>
-                        <span class="countdown-label">Mins</span>
-                    </div>
-                    <div class="countdown-unit">
-                        <span class="countdown-number" id="seconds">00</span>
-                        <span class="countdown-label">Secs</span>
-                    </div>
-                </div>
-
-                <div class="release-date">Feb 3, 2026 • 11:00am GMT</div>
-            </div>
-        </section>
+        
 
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
@@ -224,54 +190,7 @@
                 getTime();
             }, 1000);
 
-            // Countdown Timer
-            const releaseDate = new Date('2026-02-03T11:00:00Z').getTime();
-
-            const daysEl = document.getElementById('days');
-            const hoursEl = document.getElementById('hours');
-            const minutesEl = document.getElementById('minutes');
-            const secondsEl = document.getElementById('seconds');
-
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = releaseDate - now;
-
-                if (distance < 0) {
-                    daysEl.textContent = '00';
-                    hoursEl.textContent = '00';
-                    minutesEl.textContent = '00';
-                    secondsEl.textContent = '00';
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                const formatNumber = (num) => String(num).padStart(2, '0');
-
-                const updateElement = (element, value) => {
-                    const formattedValue = formatNumber(value);
-                    if (element.textContent !== formattedValue) {
-                        element.classList.add('flip');
-                        setTimeout(() => {
-                            element.textContent = formattedValue;
-                        }, 300);
-                        setTimeout(() => {
-                            element.classList.remove('flip');
-                        }, 600);
-                    }
-                };
-
-                updateElement(daysEl, days);
-                updateElement(hoursEl, hours);
-                updateElement(minutesEl, minutes);
-                updateElement(secondsEl, seconds);
-            }
-
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+            
         });
     </script>
 </body>
