@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Sync Guide - Hardware Setup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #131824;
+            --bg-card: #1a1f2e;
+            --text-primary: #e8ecf5;
+            --text-secondary: #8b95b0;
+            --accent-midi: #00ffaa;
+            --accent-audio: #ff3366;
+            --accent-sync: #3366ff;
+            --accent-usb: #ffaa00;
+            --border: #2a3347;
+            --shadow: rgba(0, 0, 0, 0.6);
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 170, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(51, 102, 255, 0.03) 0%, transparent 50%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--accent-midi) 0%, 
+                var(--accent-audio) 33%, 
+                var(--accent-sync) 66%, 
+                var(--accent-usb) 100%);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-midi), var(--accent-sync));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .legend-color {
+            width: 4px;
+            height: 40px;
+            border-radius: 2px;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .legend-color.midi { background: var(--accent-midi); }
+        .legend-color.audio { background: var(--accent-audio); }
+        .legend-color.sync { background: var(--accent-sync); }
+        .legend-color.usb { background: var(--accent-usb); }
+
+        .diagram-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 2px solid var(--border);
+            box-shadow: 0 8px 40px var(--shadow);
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--accent-midi);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-midi), transparent);
+        }
+
+        .connection-diagram {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .device {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .device:hover {
+            border-color: var(--accent-midi);
+            box-shadow: 0 0 30px rgba(0, 255, 170, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .device-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent-midi);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .device-role {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 6px;
+        }
+
+        .connections {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .connections li {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+            background: var(--bg-primary);
+            border-radius: 4px;
+        }
+
+        .connections li.midi { border-color: var(--accent-midi); }
+        .connections li.audio { border-color: var(--accent-audio); }
+        .connections li.sync { border-color: var(--accent-sync); }
+        .connections li.usb { border-color: var(--accent-usb); }
+
+        .signal-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .signal-badge.midi { background: var(--accent-midi); color: var(--bg-primary); }
+        .signal-badge.audio { background: var(--accent-audio); color: var(--bg-primary); }
+        .signal-badge.sync { background: var(--accent-sync); color: var(--bg-primary); }
+        .signal-badge.usb { background: var(--accent-usb); color: var(--bg-primary); }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            position: relative;
+            padding-left: 5rem;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            border-color: var(--accent-sync);
+            box-shadow: 0 0 30px rgba(51, 102, 255, 0.2);
+        }
+
+        .step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-sync), var(--accent-midi));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 4px 20px rgba(51, 102, 255, 0.4);
+        }
+
+        .step h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-sync);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tip-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            border-color: var(--accent-audio);
+            box-shadow: 0 0 30px rgba(255, 51, 102, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .tip-card h3 {
+            color: var(--accent-audio);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .warning {
+            background: rgba(255, 170, 0, 0.1);
+            border: 2px solid var(--accent-usb);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .warning::before {
+            content: '⚠️ ';
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        code {
+            background: var(--bg-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: var(--accent-midi);
+            font-size: 0.9rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .sync-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-sync);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--accent-sync);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .step { padding-left: 3rem; }
+            .step::before { 
+                width: 35px; 
+                height: 35px; 
+                font-size: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Studio Sync Guide</h1>
+            <p class="subtitle">Hardware Configuration & Signal Flow</p>
+        </header>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color midi"></div>
+                <div>
+                    <strong>MIDI</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Note/Control Data</div>
+                </div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color audio"></div>
+                <div>
+                    <strong>Audio</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Sound Signal</div>
+                </div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color sync"></div>
+                <div>
+                    <strong>Sync/Clock</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Timing Reference</div>
+                </div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color usb"></div>
+                <div>
+                    <strong>USB</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Data/MIDI/Power</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>🎛️ Connection Diagram</h2>
+            
+            <div class="connection-diagram">
+                <div class="device">
+                    <div class="device-title">MacBook Air M4</div>
+                    <div class="device-role"><span class="sync-indicator"></span>MASTER CLOCK - Ableton Live 12</div>
+                    <ul class="connections">
+                        <li class="usb">USB → APC40 <span class="signal-badge midi">MIDI</span></li>
+                        <li class="usb">USB → MPK25 <span class="signal-badge midi">MIDI</span></li>
+                        <li class="usb">USB → MPC One (or Ableton Link) <span class="signal-badge sync">SYNC</span></li>
+                        <li class="usb">USB → H4MIDI WC <span class="signal-badge midi">MIDI</span></li>
+                        <li class="audio">Headphone Out → Headphones <span class="signal-badge audio">MONITOR</span></li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">H4MIDI WC USB Host</div>
+                    <div class="device-role">MIDI Hub - Hardware Interconnect</div>
+                    <ul class="connections">
+                        <li class="usb">USB → MacBook (MIDI In/Out)</li>
+                        <li class="midi">MIDI OUT 1 → Octatrack MIDI IN</li>
+                        <li class="midi">MIDI OUT 2 → Hydrasynth MIDI IN</li>
+                        <li class="midi">MIDI OUT 3 → MPC One MIDI IN (optional)</li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">MPC One +</div>
+                    <div class="device-role">Standalone Sampler/Sequencer</div>
+                    <ul class="connections">
+                        <li class="usb">USB → MacBook <span class="signal-badge sync">LINK</span></li>
+                        <li class="midi">MIDI IN ← H4MIDI (optional)</li>
+                        <li class="audio">MAIN OUT L/R → L-6 Ch 1-2 <span class="signal-badge audio">STEREO</span></li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">Octatrack MK2</div>
+                    <div class="device-role">Sampler/Sequencer - MIDI Clock Slave</div>
+                    <ul class="connections">
+                        <li class="midi">MIDI IN ← H4MIDI OUT 1</li>
+                        <li class="midi">MIDI THRU → Hydrasynth (alternative)</li>
+                        <li class="audio">MAIN OUT L/R → L-6 Ch 3-4 <span class="signal-badge audio">STEREO</span></li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">ASM Hydrasynth</div>
+                    <div class="device-role">Polyphonic Synthesizer - MIDI Slave</div>
+                    <ul class="connections">
+                        <li class="midi">MIDI IN ← H4MIDI OUT 2</li>
+                        <li class="audio">OUT L/R → Boss SDE-3000 D IN <span class="signal-badge audio">STEREO</span></li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">Boss SDE-3000 D</div>
+                    <div class="device-role">Delay Effect Processor</div>
+                    <ul class="connections">
+                        <li class="audio">IN L/R ← Hydrasynth OUT</li>
+                        <li class="audio">OUT L/R → L-6 Ch 5-6 <span class="signal-badge audio">STEREO</span></li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">Zoom L-6 LiveTrack</div>
+                    <div class="device-role">Main Mixer - Audio Hub</div>
+                    <ul class="connections">
+                        <li class="audio">Ch 1-2 ← MPC One</li>
+                        <li class="audio">Ch 3-4 ← Octatrack</li>
+                        <li class="audio">Ch 5-6 ← Boss Delay (Hydrasynth)</li>
+                        <li class="audio">Headphone Out → Headphones <span class="signal-badge audio">MAIN</span></li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">Akai APC40</div>
+                    <div class="device-role">Ableton Control Surface</div>
+                    <ul class="connections">
+                        <li class="usb">USB → MacBook <span class="signal-badge midi">CONTROL</span></li>
+                    </ul>
+                </div>
+
+                <div class="device">
+                    <div class="device-title">Akai MPK25</div>
+                    <div class="device-role">MIDI Keyboard Controller</div>
+                    <ul class="connections">
+                        <li class="usb">USB → MacBook <span class="signal-badge midi">KEYS</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>⚙️ Setup Steps</h2>
+            
+            <div class="setup-steps">
+                <div class="step">
+                    <h3>Configure Ableton as Master Clock</h3>
+                    <p>In Ableton Live 12 Suite:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Go to <code>Preferences → Link/Tempo/MIDI</code></li>
+                        <li>Enable <strong>Link</strong> (for MPC One wireless sync)</li>
+                        <li>Set your desired tempo (e.g., 120 BPM)</li>
+                        <li>Under MIDI Ports, enable <code>Track</code> and <code>Sync</code> for H4MIDI outputs</li>
+                        <li>This sends MIDI clock to all your hardware via the H4MIDI hub</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <h3>Connect H4MIDI WC USB Host</h3>
+                    <p>The H4MIDI acts as your MIDI routing hub:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Connect H4MIDI to MacBook via USB</li>
+                        <li>MIDI OUT 1 → Octatrack MIDI IN (5-pin DIN)</li>
+                        <li>MIDI OUT 2 → Hydrasynth MIDI IN (5-pin DIN)</li>
+                        <li>MIDI OUT 3 → MPC One MIDI IN (optional backup to Link)</li>
+                        <li>Configure routing in H4MIDI software/firmware if needed</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <h3>Sync MPC One via Ableton Link</h3>
+                    <p>On the MPC One:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Press <code>MENU → Preferences → MIDI/Sync</code></li>
+                        <li>Set <strong>Receive MIDI Clock</strong> to <code>Off</code></li>
+                        <li>Enable <strong>Ableton Link</strong></li>
+                        <li>Connect MPC to same WiFi network as MacBook, OR use USB cable</li>
+                        <li>MPC will auto-sync tempo with Ableton - no MIDI clock needed!</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <h3>Configure Octatrack as MIDI Clock Slave</h3>
+                    <p>On the Octatrack MK2:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Press <code>FUNC + PROJECT → MIDI → SYNC</code></li>
+                        <li>Set <strong>Clock Receive</strong> to <code>On</code></li>
+                        <li>Set <strong>Clock Send</strong> to <code>Off</code></li>
+                        <li>Set <strong>Transport Receive</strong> to <code>On</code> (starts/stops with Ableton)</li>
+                        <li>Octatrack will now follow Ableton's tempo and transport</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <h3>Set Hydrasynth to Receive MIDI Clock</h3>
+                    <p>On the Hydrasynth:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Go to <code>GLOBAL → MIDI → Clock</code></li>
+                        <li>Set <strong>Clock Source</strong> to <code>MIDI</code></li>
+                        <li>Arpeggiator and sequencer will sync to incoming MIDI clock</li>
+                        <li>Set MIDI channel if you want to play it from Ableton/MPK25</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <h3>Route Audio to L-6 Mixer</h3>
+                    <p>Physical cable connections:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li><strong>MPC One</strong> MAIN L/R → L-6 Channels 1-2 (TRS/XLR)</li>
+                        <li><strong>Octatrack</strong> MAIN L/R → L-6 Channels 3-4 (TRS/XLR)</li>
+                        <li><strong>Hydrasynth</strong> OUT L/R → Boss SDE-3000 D IN L/R</li>
+                        <li><strong>Boss SDE-3000 D</strong> OUT L/R → L-6 Channels 5-6</li>
+                        <li>Adjust gain staging on L-6 for each channel</li>
+                        <li>Use L-6 headphone output for monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <h3>Test the Sync</h3>
+                    <p>Verification checklist:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li>Start playback in Ableton Live</li>
+                        <li>Verify MPC One shows matching tempo and plays in sync</li>
+                        <li>Verify Octatrack shows "MIDI CLOCK" indicator and plays in time</li>
+                        <li>Check Hydrasynth arpeggiator syncs correctly</li>
+                        <li>Adjust buffer size in Ableton if you experience latency</li>
+                        <li>All devices should start/stop together when you hit play/stop in Ableton</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>💡 Pro Tips & Best Practices</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Latency Compensation</h3>
+                    <p>MIDI and audio latency can cause timing issues. In Ableton:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Lower buffer size for less latency (64-128 samples)</li>
+                        <li>Use Track Delay to nudge MIDI tracks forward/back</li>
+                        <li>Enable "Delay Compensation" in Preferences</li>
+                    </ul>
+                </div>
+
+                <div class="tip-card">
+                    <h3>MIDI Channel Management</h3>
+                    <p>Avoid conflicts by assigning unique MIDI channels:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Octatrack auto-channel (receives on all)</li>
+                        <li>Hydrasynth - set to channel 2-3</li>
+                        <li>Create separate MIDI tracks in Ableton for each device</li>
+                        <li>Use External Instrument device to monitor hardware synths</li>
+                    </ul>
+                </div>
+
+                <div class="tip-card">
+                    <h3>Recording Hardware to Ableton</h3>
+                    <p>Capture your hardware performances:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>If L-6 has USB audio interface, route it to Ableton</li>
+                        <li>Otherwise record MacBook's mix-down</li>
+                        <li>Use Ableton's Resampling to capture internal mix</li>
+                        <li>Or run separate audio interface for multi-track recording</li>
+                    </ul>
+                </div>
+
+                <div class="tip-card">
+                    <h3>Workflow Optimization</h3>
+                    <p>Streamline your creative process:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Use MPC One standalone for quick beat sketches</li>
+                        <li>Sync to Ableton Link when ready to expand</li>
+                        <li>Use Octatrack as live sampler/looper</li>
+                        <li>Reserve VCV Rack & Phase Plant for intricate sound design</li>
+                    </ul>
+                </div>
+
+                <div class="tip-card">
+                    <h3>Power & Startup Sequence</h3>
+                    <p>Avoid pops and clicks:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Turn on mixer (L-6) LAST</li>
+                        <li>Power up synths and effects first</li>
+                        <li>Start MacBook and launch Ableton</li>
+                        <li>Then power on L-6 with headphones unplugged</li>
+                    </ul>
+                </div>
+
+                <div class="tip-card">
+                    <h3>Alternative: All Hardware Standalone</h3>
+                    <p>Don't need the computer? Try this:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Use Octatrack as master clock (MIDI OUT → all devices)</li>
+                        <li>Or use MPC One as master (excellent sequencer)</li>
+                        <li>Sync all gear via MIDI clock from one device</li>
+                        <li>Mix everything through L-6, no computer needed</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>Neighbour-Friendly Note:</strong> Since you're on headphones-only, make sure all audio is routed through your L-6 mixer or MacBook. The L-6's headphone output gives you a proper mix of all your hardware. You can also monitor via MacBook headphone jack if routing audio through an interface. Keep those speakers off! 🔇
+            </div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>🎵 Quick Reference</h2>
+            
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+                <h3 style="color: var(--accent-sync); margin-bottom: 1rem;">Signal Flow Summary</h3>
+                <div style="font-family: 'JetBrains Mono', monospace; line-height: 2; color: var(--text-secondary);">
+                    <div style="color: var(--accent-sync);">⬤ SYNC/CLOCK:</div>
+                    Ableton (Master) → [Ableton Link] → MPC One<br>
+                    Ableton (Master) → H4MIDI → Octatrack → Hydrasynth
+                    
+                    <div style="color: var(--accent-midi); margin-top: 1.5rem;">⬤ MIDI NOTES/CONTROL:</div>
+                    MPK25 → MacBook → VCV Rack / Phase Plant<br>
+                    APC40 → MacBook → Ableton Live control<br>
+                    MacBook → H4MIDI → Octatrack / Hydrasynth
+                    
+                    <div style="color: var(--accent-audio); margin-top: 1.5rem;">⬤ AUDIO:</div>
+                    MPC One → L-6 Ch 1-2<br>
+                    Octatrack → L-6 Ch 3-4<br>
+                    Hydrasynth → Boss Delay → L-6 Ch 5-6<br>
+                    L-6 Mix → Headphones 🎧
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; color: var(--text-secondary);">
+                <p style="font-size: 1.1rem;">You're all set! This configuration gives you maximum flexibility for jamming, recording, and producing.</p>
+                <p style="margin-top: 1rem;">Happy music making! 🎛️✨</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
