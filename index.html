@@ -10,6 +10,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,600;1,300&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        /* Vinyl release hero */
+        #vinyl-release { padding: 100px 5vw 60px; }
+        .vinyl-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .vinyl-image { flex: 1 1 340px; max-width: 460px; }
+        .vinyl-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        }
+        .vinyl-text { flex: 1 1 340px; max-width: 480px; }
+        .vinyl-text h3 {
+            font-weight: 900;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.05;
+            margin: 0 0 20px;
+        }
+        .vinyl-text p {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 300;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0 0 24px;
+        }
+        .vinyl-cta { margin-bottom: 28px; }
+        .vinyl-note { font-size: 0.9rem; opacity: 0.75; }
+        .vinyl-note a { color: #e99708; text-decoration: none; }
+        .vinyl-note a:hover { text-decoration: underline; }
+
+        /* Nav items: icon + label */
+        nav ul li a i { margin-right: 8px; }
+
+        @media (max-width: 768px) {
+            #vinyl-release { padding-top: 90px; }
+            .vinyl-container { gap: 32px; }
+            .vinyl-text { text-align: center; }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,8 +72,13 @@
             <ul>
                 <!-- <li><a href="#countdown">UPCOMING</a></li> -->
                 <li>
+                    <a href="#vinyl-release">
+                        <i class="fas fa-record-vinyl"></i>VINYL
+                    </a>
+                </li>
+                <li>
                     <a href="https://brooklynzhen.bandcamp.com" target="_blank" aria-label="Bandcamp">
-                        <i class="fab fa-bandcamp"></i>
+                        <i class="fab fa-bandcamp"></i>Bandcamp
                     </a>
                 </li>
                 <li><a href="#new-music">NEW MUSIC</a></li>
@@ -39,24 +91,26 @@
 
     <main>
 
-        
-
-        <!-- Hero Section -->
-        <section id="new-music" class="music-section" style="padding-top: 80px !important;">
-            
-            <div class="music-container">
-                <div class="music-image">
-                    <div class="section-header">
-                        <h2>Buy "Light of the Dead" on Bandcamp and support underground music.</h2>
-                    </div>
+        <!-- Hero Section: Vinyl Release -->
+        <section id="vinyl-release" class="vinyl-section">
+            <div class="section-header">
+                <h2>NEW VINYL RELEASE</h2>
+            </div>
+            <div class="vinyl-container">
+                <div class="vinyl-image">
+                    <img src="001_cover_brooklynzhen_2026.png" alt="Brooklynzhen 001 — Vinyl Only 6 Track Album">
                 </div>
-                <div class="music-image">
-                    <iframe style="border: 0; width: 90vw; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1154320108/size=large/bgcol=333333/linkcol=e99708/tracklist=false/transparent=true/" seamless><a href="https://brooklynzhen.bandcamp.com/track/light-of-the-dead-2">Light of the Dead by Brooklynzhen</a></iframe>
+                <div class="vinyl-text">
+                    <h3>BROOKLYNZHEN 001</h3>
+                    <p>Vinyl Only 6 Track Album — available to order via SoundCloud / ElasticStage.</p>
+                    <div class="vinyl-cta">
+                        <a href="https://elasticstage.com/soundcloud/releases/brooklynzhen-001-album" target="_blank" rel="noopener" class="btn">Order the Vinyl</a>
+                    </div>
+                    <p class="vinyl-note">Prefer digital? Email <a href="mailto:info@brooklynzhen.com">info@brooklynzhen.com</a> for a private link to download the album.</p>
                 </div>
             </div>
         </section>
-            
-       
+
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
             <div class="hero-content">
@@ -102,6 +156,20 @@
                 </div>
                 <div class="music-player">
                     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7hmHJVoCcsrc3xflvuvUuK?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Music: Light of the Dead (Bandcamp) -->
+        <section id="new-music" class="music-section">
+            <div class="music-container">
+                <div class="music-image">
+                    <div class="section-header">
+                        <h2>Buy "Light of the Dead" on Bandcamp and support underground music.</h2>
+                    </div>
+                </div>
+                <div class="music-image">
+                    <iframe style="border: 0; width: 90vw; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1154320108/size=large/bgcol=333333/linkcol=e99708/tracklist=false/transparent=true/" seamless><a href="https://brooklynzhen.bandcamp.com/track/light-of-the-dead-2">Light of the Dead by Brooklynzhen</a></iframe>
                 </div>
             </div>
         </section>
@@ -158,7 +226,6 @@
                         <a href="https://youtube.com/@Brooklynzhen" target="_blank" aria-label="YouTube">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href=""
                         <a href="mailto:allangmccafferty@icloud.com" aria-label="Email">
                             <i class="fas fa-envelope"></i>
                         </a>
