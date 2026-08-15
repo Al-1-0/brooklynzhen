@@ -84,23 +84,6 @@ header {
     color: var(--primary-color);
 }
 
-.logo a {
-    font-family: 'Chakra Petch', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-}
-
-.logo-subline {
-    display: block;
-    font-family: 'Chakra Petch', sans-serif;
-    font-weight: 300;
-    font-size: 0.72rem;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 4px;
-}
-
 nav ul {
     display: flex;
     gap: 30px;
@@ -356,7 +339,7 @@ nav ul li a:hover {
 /* Hero Section */
 .hero-section {
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('background_synth_001.png');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('social-thumb-5b-1120.png');
     background-size: cover;
     background-position: center;
     display: flex;
