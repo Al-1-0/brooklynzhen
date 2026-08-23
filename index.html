@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;500;700&family=Space+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,600;1,300&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;500;700&family=Space+Mono&family=Work+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
         /* Vinyl release hero */
@@ -91,6 +92,7 @@
                 <li><a href="#new-music">NEW MUSIC</a></li>
                 <li><a href="#bio">BIO</a></li>
                 <li><a href="#music">MUSIC</a></li>
+                <li><a href="otp">OCTATRACK 2 GUIDE</a></li>
                 <li><a href="#contact">CONTACT</a></li>
             </ul>
         </nav>
@@ -103,6 +105,15 @@
                 <div class="hero-cta">
                     <!-- <a href="#bio" class="btn">Discover</a> -->
                 </div>
+            </div>
+        </section>
+        <!-- Beatport Release -->
+        <section id="beatport-release" class="beatport-section">
+            <div class="section-header">
+                <h2>OUT NOW ON BEATPORT</h2>
+            </div>
+            <div class="beatport-container">
+                <iframe src="https://embed.beatport.com/?id=7348606&type=release" width="100%" height="362" frameborder="0" scrolling="no" style="max-width:600px;"></iframe>
             </div>
         </section>
         <!-- Hero Section: Vinyl Release -->
@@ -124,15 +135,7 @@
                 </div>
             </div>
         </section>
-        <!-- Beatport Release -->
-        <section id="beatport-release" class="beatport-section">
-            <div class="section-header">
-                <h2>OUT NOW ON BEATPORT</h2>
-            </div>
-            <div class="beatport-container">
-                <iframe src="https://embed.beatport.com/?id=7348606&type=release" width="100%" height="362" frameborder="0" scrolling="no" style="max-width:600px;"></iframe>
-            </div>
-        </section>
+        
 
         <!-- Bio Section -->
         <section id="bio" class="bio-section">
@@ -148,6 +151,7 @@
                 </div>
             </div>
         </section>
+
         <!-- Music Section -->
         <section id="music" class="music-section">
             <div class="section-header">
@@ -191,6 +195,36 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== OTP HTML ================== -->
+        <section id="otp">
+            <div class="otp-inner">
+                <div class="otp-copy">
+                <p class="otp-eyebrow">Unofficial field guide · Elektron Octatrack MK2</p>
+                <h2 class="otp-title">Stop fighting<br>the Octatrack.</h2>
+                <p class="otp-sub">The deep stuff the manual buries — machine types, the project hierarchy, scenes — turned into moves you can pull on stage. <strong>The Octatrack MK2 Playbook</strong> is a 15-page, fact-checked reference I made.</p>
+                <div class="otp-cta">
+                    <a class="otp-buy" href="https://electronicaplaybooks.gumroad.com/l/octatrack-mk2-playbook" target="_blank" rel="noopener">Get the Playbook →</a>
+                    <span class="otp-micro">Instant PDF · 15 pages</span>
+                </div>
+                </div>
+
+                <div class="otp-stage">
+                <div class="otp-cover" id="otpCover">
+                    <img src="octatrack-playbook-cover.jpg" alt="Cover of The Octatrack MK2 Playbook">
+                    <div class="otp-wash" id="otpWash"></div>
+                </div>
+                <div class="otp-fader">
+                    <div class="otp-lbls"><span class="on" id="otpA">Scene A</span><span id="otpB">Scene B</span></div>
+                    <input class="otp-xf" id="otpXf" type="range" min="0" max="100" value="0" aria-label="Scene morph crossfader, A to B">
+                    <p class="otp-cap">Drag the fader — <b id="otpCap">open &amp; dry</b>. Scene morphing: the guide's core live move.</p>
+                </div>
+                </div>
+            </div>
+        </section>
+        <!-- ===== /OTP HTML ===== -->
+        
+        
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="section-header">
@@ -307,5 +341,28 @@
 
         });
     </script>
+    <!-- ===== OTP JS =============== -->
+    <script>
+    (function(){
+    var xf=document.getElementById('otpXf');
+    if(!xf) return;
+    var img=document.querySelector('#otpCover img'),
+        wash=document.getElementById('otpWash'),
+        cap=document.getElementById('otpCap'),
+        a=document.getElementById('otpA'),
+        b=document.getElementById('otpB');
+    function morph(){
+        var v=+xf.value/100;
+        if(img) img.style.filter='brightness('+(1-0.34*v)+') saturate('+(1+0.45*v)+') blur('+(2.2*v).toFixed(2)+'px) hue-rotate('+(-10*v)+'deg)';
+        if(wash) wash.style.opacity=v.toFixed(2);
+        if(cap) cap.textContent = v<0.5 ? 'open & dry' : 'filtered & washed';
+        if(a) a.classList.toggle('on', v<0.5);
+        if(b) b.classList.toggle('on', v>=0.5);
+    }
+    xf.addEventListener('input', morph);
+    morph();
+    })();
+    </script>
+    <!-- ===== /OTP JS ===== -->
 </body>
 </html>
