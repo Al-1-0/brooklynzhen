@@ -48,10 +48,16 @@
         .vinyl-note { font-size: 0.9rem; opacity: 0.75; }
         .vinyl-note a { color: #e99708; text-decoration: none; }
         .vinyl-note a:hover { text-decoration: underline; }
-
+        /* Beatport release */
+        #beatport-release { padding: 40px 5vw 60px; }
+        .beatport-container {
+            display: flex;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
         /* Nav items: icon + label */
         nav ul li a i { margin-right: 8px; }
-
         @media (max-width: 768px) {
             #vinyl-release { padding-top: 90px; }
             .vinyl-container { gap: 32px; }
@@ -89,18 +95,16 @@
             </ul>
         </nav>
     </header>
-
     <main>
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
             <div class="hero-content">
-                
+
                 <div class="hero-cta">
                     <!-- <a href="#bio" class="btn">Discover</a> -->
                 </div>
             </div>
         </section>
-
         <!-- Hero Section: Vinyl Release -->
         <section id="vinyl-release" class="vinyl-section">
             <div class="section-header">
@@ -120,8 +124,15 @@
                 </div>
             </div>
         </section>
-
-        
+        <!-- Beatport Release -->
+        <section id="beatport-release" class="beatport-section">
+            <div class="section-header">
+                <h2>OUT NOW ON BEATPORT</h2>
+            </div>
+            <div class="beatport-container">
+                <iframe src="https://embed.beatport.com/?id=7348606&type=release" width="100%" height="362" frameborder="0" scrolling="no" style="max-width:600px;"></iframe>
+            </div>
+        </section>
 
         <!-- Bio Section -->
         <section id="bio" class="bio-section">
@@ -137,7 +148,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Music Section -->
         <section id="music" class="music-section">
             <div class="section-header">
@@ -158,7 +168,6 @@
                 </div>
             </div>
         </section>
-
         <!-- New Music: Light of the Dead (Bandcamp) -->
         <section id="new-music" class="music-section">
             <div class="music-container">
@@ -172,7 +181,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="section-header">
@@ -233,14 +241,12 @@
             </div>
         </section>
     </main>
-
     <footer>
         <div class="footer-content">
             <p>© 2026 BROOKLYNZHEN</p>
             <div class="time" id="time"></div>
         </div>
     </footer>
-
     <script>
         // Toggle mobile menu
         $(document).ready(function() {
@@ -248,13 +254,11 @@
                 $('nav').toggleClass('active');
                 $(this).toggleClass('active');
             });
-
             // Close menu when clicking a link
             $('nav a').click(function() {
                 $('nav').removeClass('active');
                 $('.menu-toggle').removeClass('active');
             });
-
             // Smooth scrolling for anchor links
             $('a[href^="#"]').on('click', function(e) {
                 e.preventDefault();
@@ -265,7 +269,6 @@
                     }, 800);
                 }
             });
-
             // Form submission
             $('#contactForm').submit(function(e) {
                 $('#thanksMessage').fadeIn();
@@ -273,7 +276,6 @@
                     $('#thanksMessage').fadeOut();
                 }, 3000);
             });
-
             // Clock function
             function getTime() {
                 var date = new Date();
@@ -289,12 +291,10 @@
                     hours + ":" + minutes + ":" + seconds + " " + newformat;
             }
             getTime();
-
             window.setInterval(function() {
                 getTime();
             }, 1000);
 
-            
         });
     </script>
 </body>
